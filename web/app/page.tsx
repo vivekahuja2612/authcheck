@@ -39,7 +39,7 @@ export default function HomePage() {
           letterSpacing: '-0.8px',
           lineHeight: 1.15,
         }}>
-          You paid real money.<br />Trust your gut.
+          You don't need Reddit to tell you<br />if your $280 shoes are fake.
         </h1>
         <p style={{
           fontSize: '18px',
