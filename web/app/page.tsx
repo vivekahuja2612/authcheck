@@ -1,5 +1,4 @@
-const STRIPE_URL = 'https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00'
-
+import Link from 'next/link'
 const CHECK_ROWS = [
   { name: 'Heel tab font & sizing', result: 'Fail', detail: 'Font 15% thicker than Jordan Brand spec — common on Chicago replicas from 2022 batch.' },
   { name: 'Red panel leather grain', result: 'Fail', detail: 'Smooth grain inconsistent with authentic Nike full-grain leather used on OG Chicago run.' },
@@ -52,7 +51,7 @@ export default function HomePage() {
         }}>
           Upload six photos. Get a verdict in 30 seconds — with the exact evidence you need to keep it or return it.
         </p>
-        <a href={STRIPE_URL} target="_blank" rel="noopener noreferrer" style={{
+        <Link href="/category" style={{
           display: 'inline-block',
           background: '#111111',
           color: '#FFFFFF',
@@ -64,7 +63,7 @@ export default function HomePage() {
           letterSpacing: '-0.2px',
         }}>
           Authenticate an Item
-        </a>
+        </Link>
         <p style={{ fontSize: '13px', color: '#BBBBBB', marginTop: '16px' }}>
           No account. No install. Free.
         </p>
@@ -247,7 +246,7 @@ export default function HomePage() {
         <p style={{ fontSize: '16px', color: '#888888', margin: '0 0 36px' }}>
           Your photos are never stored. No account required.
         </p>
-        <a href={STRIPE_URL} target="_blank" rel="noopener noreferrer" style={{
+        <Link href="/category" style={{
           display: 'inline-block',
           background: '#FFFFFF',
           color: '#111111',
@@ -259,7 +258,7 @@ export default function HomePage() {
           letterSpacing: '-0.2px',
         }}>
           Authenticate an Item
-        </a>
+        </Link>
       </section>
 
     </main>

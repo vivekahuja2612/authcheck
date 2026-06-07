@@ -286,7 +286,7 @@ export default function PhotosPage() {
       )}
 
       <button
-        onClick={handleAuthenticate}
+        onClick={() => window.open('https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00', '_blank')}
         disabled={!canSubmit}
         style={{
           background: canSubmit ? '#111111' : '#E8E8E4',
