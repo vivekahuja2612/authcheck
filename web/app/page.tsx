@@ -1,3 +1,4 @@
+const STRIPE_URL = 'https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00'
 
 const CHECK_ROWS = [
   { name: 'Heel tab font & sizing', result: 'Fail', detail: 'Font 15% thicker than Jordan Brand spec — common on Chicago replicas from 2022 batch.' },
@@ -9,7 +10,7 @@ const CHECK_ROWS = [
 
 const STEPS = [
   { n: '1', heading: 'Name your shoe', body: 'Tell us what you bought — Jordan 1 Chicago, Dunk Low Panda, Yeezy 350 V2. Be specific. We know the tells for each one.' },
-  { n: '2', heading: 'Upload your photos', body: 'Six angles: front, back, sides, sole, and tag. Drag and drop. We flag any photo that\'s too blurry to use before you submit.' },
+  { n: '2', heading: 'Upload your photos', body: "Six angles: front, back, sides, sole, and tag. Drag and drop. We flag any photo that's too blurry to use before you submit." },
   { n: '3', heading: 'Get your verdict', body: 'Authentic. Likely Fake. Or Inconclusive — with a specific reason and exactly what to do next.' },
 ]
 
@@ -38,7 +39,7 @@ export default function HomePage() {
           letterSpacing: '-0.8px',
           lineHeight: 1.15,
         }}>
-          You don't need Reddit to tell you<br />if your $280 shoes are fake.
+          You don&apos;t need Reddit to tell you<br />if your $280 shoes are fake.
         </h1>
         <p style={{
           fontSize: '18px',
@@ -51,7 +52,7 @@ export default function HomePage() {
         }}>
           Upload six photos. Get a verdict in 30 seconds — with the exact evidence you need to keep it or return it.
         </p>
-        <a href="https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00" target="_blank" rel="noopener noreferrer" style={
+        <a href={STRIPE_URL} target="_blank" rel="noopener noreferrer" style={{
           display: 'inline-block',
           background: '#111111',
           color: '#FFFFFF',
@@ -61,7 +62,7 @@ export default function HomePage() {
           fontWeight: 600,
           fontSize: '16px',
           letterSpacing: '-0.2px',
-        }>
+        }}>
           Authenticate an Item
         </a>
         <p style={{ fontSize: '13px', color: '#BBBBBB', marginTop: '16px' }}>
@@ -73,13 +74,13 @@ export default function HomePage() {
       <section style={{ background: '#FFFFFF', borderTop: '1px solid #E8E8E4', borderBottom: '1px solid #E8E8E4' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '64px 20px' }}>
           <h2 style={{ fontSize: '26px', fontWeight: 700, color: '#111111', margin: '0 0 24px', letterSpacing: '-0.5px' }}>
-            The box arrived. Something's off.
+            The box arrived. Something&apos;s off.
           </h2>
           <p style={{ fontSize: '16px', color: '#444444', lineHeight: 1.7, margin: '0 0 16px' }}>
-            Maybe it's the toe box. Maybe the leather looks wrong. Maybe you can't name it — you just know.
+            Maybe it&apos;s the toe box. Maybe the leather looks wrong. Maybe you can&apos;t name it — you just know.
           </p>
           <p style={{ fontSize: '16px', color: '#444444', lineHeight: 1.7, margin: '0 0 16px' }}>
-            You paid $280. The return window is closing. Your options: post on Reddit and wait three hours for someone to say "looks legit to me" — with no explanation. Text a friend who might reply tomorrow. Or accept them and spend the next six months wondering.
+            You paid $280. The return window is closing. Your options: post on Reddit and wait three hours for someone to say &quot;looks legit to me&quot; — with no explanation. Text a friend who might reply tomorrow. Or accept them and spend the next six months wondering.
           </p>
           <p style={{ fontSize: '16px', color: '#111111', fontWeight: 600, lineHeight: 1.7, margin: 0 }}>
             None of that is good enough. AuthCheck is built for this moment.
@@ -124,7 +125,7 @@ export default function HomePage() {
       <section style={{ background: '#F8F8F6', borderTop: '1px solid #E8E8E4', borderBottom: '1px solid #E8E8E4' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '64px 20px' }}>
           <h2 style={{ fontSize: '26px', fontWeight: 700, color: '#111111', margin: '0 0 8px', letterSpacing: '-0.5px' }}>
-            Not "looks real." Actual evidence.
+            Not &quot;looks real.&quot; Actual evidence.
           </h2>
           <p style={{ fontSize: '16px', color: '#8A8A8A', margin: '0 0 32px', lineHeight: 1.6 }}>
             Every result names the specific checks we ran — not generic observations.
@@ -136,7 +137,6 @@ export default function HomePage() {
             borderRadius: '10px',
             overflow: 'hidden',
           }}>
-            {/* Verdict header */}
             <div style={{ padding: '24px 24px 20px', borderBottom: '1px solid #E8E8E4' }}>
               <div style={{
                 display: 'inline-flex',
@@ -155,7 +155,6 @@ export default function HomePage() {
               <div style={{ fontSize: '13px', color: '#8A8A8A' }}>3 of 5 checks failed. One check inconclusive due to photo angle.</div>
             </div>
 
-            {/* Check table */}
             <div>
               {CHECK_ROWS.map((row, i) => (
                 <div key={row.name} style={{
@@ -179,7 +178,6 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Next step */}
             <div style={{
               padding: '16px 24px',
               background: '#FDF1F0',
@@ -222,10 +220,10 @@ export default function HomePage() {
             padding: '24px',
           }}>
             <div style={{ fontSize: '18px', fontWeight: 700, color: '#111111', marginBottom: '12px', letterSpacing: '-0.3px' }}>
-              We'll never say 100%.
+              We&apos;ll never say 100%.
             </div>
             <p style={{ fontSize: '15px', color: '#555555', lineHeight: 1.65, margin: 0 }}>
-              Photo authentication can't verify internal materials, weight, or smell. So we cap confidence at 95% — always — and tell you exactly why. Honesty about limits is more useful than false certainty.
+              Photo authentication can&apos;t verify internal materials, weight, or smell. So we cap confidence at 95% — always — and tell you exactly why. Honesty about limits is more useful than false certainty.
             </p>
           </div>
         </div>
@@ -249,7 +247,7 @@ export default function HomePage() {
         <p style={{ fontSize: '16px', color: '#888888', margin: '0 0 36px' }}>
           Your photos are never stored. No account required.
         </p>
-        <a href="https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00" target="_blank" rel="noopener noreferrer" style={
+        <a href={STRIPE_URL} target="_blank" rel="noopener noreferrer" style={{
           display: 'inline-block',
           background: '#FFFFFF',
           color: '#111111',
@@ -259,7 +257,7 @@ export default function HomePage() {
           fontWeight: 600,
           fontSize: '16px',
           letterSpacing: '-0.2px',
-        }>
+        }}>
           Authenticate an Item
         </a>
       </section>
