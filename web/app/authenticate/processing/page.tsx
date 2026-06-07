@@ -7,12 +7,27 @@ import type { AuthResult } from '@/types/auth'
 
 export default function ProcessingPage() {
   const router = useRouter()
-  const { productName, images, setResult, setError } = useAuth()
+  const { productName, images, setProductName, setImages, setResult, setError } = useAuth()
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const called = useRef(false)
 
   useEffect(() => {
-    if (!productName || images.length === 0) {
+    let activeProductName = productName
+    let activeImages = images
+
+    const pending = sessionStorage.getItem('authcheck_pending')
+    if (pending) {
+      try {
+        const parsed = JSON.parse(pending)
+        activeProductName = parsed.productName
+        activeImages = parsed.images
+        setProductName(parsed.productName)
+        setImages(parsed.images)
+      } catch { /* malformed — ignore */ }
+      sessionStorage.removeItem('authcheck_pending')
+    }
+
+    if (!activeProductName || activeImages.length === 0) {
       router.replace('/authenticate/product')
       return
     }
@@ -25,7 +40,7 @@ export default function ProcessingPage() {
     fetch('/api/authenticate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productName, images }),
+      body: JSON.stringify({ productName: activeProductName, images: activeImages }),
       signal: controller.signal,
     })
       .then(async (res) => {

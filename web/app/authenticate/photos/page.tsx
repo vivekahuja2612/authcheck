@@ -286,7 +286,17 @@ export default function PhotosPage() {
       )}
 
       <button
-        onClick={() => window.open('https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00', '_blank')}
+        onClick={() => {
+          const filledImages = slots.filter(Boolean)
+          if (filledImages.length < 5) return
+          try {
+            sessionStorage.setItem('authcheck_pending', JSON.stringify({
+              productName,
+              images: filledImages,
+            }))
+          } catch { /* quota exceeded — proceed anyway */ }
+          window.location.href = 'https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00'
+        }}
         disabled={!canSubmit}
         style={{
           background: canSubmit ? '#111111' : '#E8E8E4',
