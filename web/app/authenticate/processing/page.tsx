@@ -15,7 +15,7 @@ export default function ProcessingPage() {
     let activeProductName = productName
     let activeImages = images
 
-    const pending = sessionStorage.getItem('authcheck_pending')
+    const pending = localStorage.getItem('authcheck_pending')
     if (pending) {
       try {
         const parsed = JSON.parse(pending)
@@ -24,7 +24,7 @@ export default function ProcessingPage() {
         setProductName(parsed.productName)
         setImages(parsed.images)
       } catch { /* malformed — ignore */ }
-      sessionStorage.removeItem('authcheck_pending')
+      localStorage.removeItem('authcheck_pending')
     }
 
     if (!activeProductName || activeImages.length === 0) {

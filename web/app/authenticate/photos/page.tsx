@@ -9,6 +9,33 @@ type MediaType = ImagePayload['mediaType']
 
 const SLOT_LABELS = ['Front', 'Back', 'Left Side', 'Right Side', 'Sole', 'Tag / Barcode']
 
+const STRIPE_URL = 'https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00'
+
+async function compressImage(img: ImagePayload): Promise<ImagePayload> {
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.onload = () => {
+      const MAX = 1024
+      let { width, height } = image
+      if (width > MAX || height > MAX) {
+        if (width > height) { height = Math.round(height * MAX / width); width = MAX }
+        else { width = Math.round(width * MAX / height); height = MAX }
+      }
+      const canvas = document.createElement('canvas')
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')
+      if (!ctx) { resolve(img); return }
+      ctx.drawImage(image, 0, 0, width, height)
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.75)
+      resolve({ data: dataUrl.split(',')[1], mediaType: 'image/jpeg' })
+    }
+    image.onerror = () => resolve(img)
+    image.src = `data:${img.mediaType};base64,${img.data}`
+  })
+}
+
+
 function toClaudeMediaType(raw: string): MediaType {
   const supported: MediaType[] = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
   if (supported.includes(raw as MediaType)) return raw as MediaType
@@ -286,16 +313,18 @@ export default function PhotosPage() {
       )}
 
       <button
-        onClick={() => {
-          const filledImages = slots.filter(Boolean)
+        onClick={async () => {
+          const filledImages = slots.filter(Boolean) as ImagePayload[]
           if (filledImages.length < 5) return
+          setValidating(true)
+          const compressed = await Promise.all(filledImages.map(compressImage))
           try {
-            sessionStorage.setItem('authcheck_pending', JSON.stringify({
+            localStorage.setItem('authcheck_pending', JSON.stringify({
               productName,
-              images: filledImages,
+              images: compressed,
             }))
-          } catch { /* quota exceeded — proceed anyway */ }
-          window.location.href = 'https://buy.stripe.com/test_dRm5kF8nlgCr8Uu4aRenS00'
+          } catch { /* storage unavailable — proceed anyway */ }
+          window.location.href = STRIPE_URL
         }}
         disabled={!canSubmit}
         style={{
@@ -310,7 +339,7 @@ export default function PhotosPage() {
           transition: 'background 0.15s ease, color 0.15s ease',
         }}
       >
-        {validating ? 'Checking photos…' : 'Authenticate'}
+        {validating ? 'Preparing…' : 'Authenticate'}
       </button>
       <p style={{ margin: '8px 0 0', fontSize: '13px', color: '#8A8A8A' }}>
         Analysis takes up to 30 seconds
